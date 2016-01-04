@@ -19,7 +19,7 @@ int main()
     CHttpCurl::CurlGlobalInit();
     CHttpTest ht;
     ht.Post(posturl,postfileds);
-    std::string geturl = "https://www.googleapis.com/androidpublisher/v2/applications/packageName/purchases/products/productId/tokens/token"
+    std::string geturl = "https://www.googleapis.com/androidpublisher/v2/applications/packageName/purchases/products/productId/tokens/token";
     ht.Get(geturl);
     CHttpCurl::CurlGlobalCleanUp();
     return 0;
