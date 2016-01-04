@@ -3,6 +3,6 @@
 需要libcurl
 
 # Example
-main.cpp
-g++ main.cpp -o test -lcurl -g
+例子：main.cpp
+编译命令：g++ main.cpp -o test -lcurl -g
 
