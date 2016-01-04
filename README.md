@@ -3,5 +3,6 @@
 需要libcurl
 
 # Example
-
+main.cpp
+g++ main.cpp -o test -lcurl -g
 
