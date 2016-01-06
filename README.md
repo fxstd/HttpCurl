@@ -1,6 +1,5 @@
 # HttpCurl
-封装了简单的http/https post/get方法
-需要libcurl
+封装了简单的http/https post/get方法 基于libcurl实现
 
 # Example
 例子：main.cpp
