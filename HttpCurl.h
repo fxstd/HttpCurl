@@ -3,8 +3,6 @@
 
 #include <curl/curl.h>
 
-size_t rev_data(void *ptr, size_t size, size_t nmemb, void *stream);
-
 class CHttpCurl
 {
 	public:
@@ -26,6 +24,18 @@ class CHttpCurl
 		static void CurlGlobalCleanUp()
 		{
 			curl_global_cleanup();
+		}
+		static size_t rev_data(void *ptr, size_t size, size_t nmemb, void *stream)
+		{
+			CHttpCurl* pHttp = (CHttpCurl*)stream;
+			size_t len = size * nmemb;
+			std::string response;
+			if(ptr && len)
+			{
+				response.assign((char*)ptr,len);
+			}
+			pHttp->Response(response);
+			return size * nmemb;
 		}
 		//提交POST请求
 		//url post请求的url地址
@@ -81,15 +91,4 @@ class CHttpCurl
 		CURLcode m_curlCode;
 		CURL* m_curl;
 };
-size_t rev_data(void *ptr, size_t size, size_t nmemb, void *stream)
-{
-	CHttpCurl* pHttp = (CHttpCurl*)stream;
-	size_t len = size * nmemb;
-	std::string response;
-	if(ptr && len)
-	{
-		response.assign((char*)ptr,len);
-	}
-	pHttp->Response(response);
-	return size * nmemb;
-}
+
