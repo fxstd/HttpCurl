@@ -84,11 +84,22 @@ class CHttpCurl
 		{
 			return m_curlCode;
 		}
+		//设置附带数据
+	        void SetExtra(void* extra)
+	        {   
+	            m_extra = extra;
+	        }   
+	        //获取附带数据
+	        void* GetExtra()
+	        {   
+	            return m_extra;
+	        } 
 		//post/get 请求的相应函数
 		//response 收到的相应数据
 		virtual void Response(std::string& response) = 0;
 	private:
 		CURLcode m_curlCode;
 		CURL* m_curl;
+		void* m_extra;
 };
 
