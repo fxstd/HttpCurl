@@ -9,6 +9,7 @@ class CHttpCurl
 		CHttpCurl()
 		{
 			m_curlCode = CURLE_OK;
+			m_extra = NULL;
 		}
 		virtual ~CHttpCurl()
 		{
