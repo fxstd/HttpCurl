@@ -113,6 +113,7 @@ class CHttpCurl
 		CURLcode Post(std::string& url,std::string& fileds)
 		{
 			m_curl = curl_easy_init();
+			curl_easy_setopt(m_curl, CURLOPT_NOSIGNAL, 1L);
 			curl_easy_setopt(m_curl, CURLOPT_URL,url.c_str());
 			curl_easy_setopt(m_curl, CURLOPT_POSTFIELDS,fileds.c_str());
 			if(url.find("https://") != std::string::npos)
@@ -134,6 +135,7 @@ class CHttpCurl
 		CURLcode Get(std::string& url)
 		{
 			m_curl = curl_easy_init();
+			curl_easy_setopt(m_curl, CURLOPT_NOSIGNAL, 1L);
 			curl_easy_setopt(m_curl, CURLOPT_URL,url.c_str());
 			if(url.find("https://") != std::string::npos)
 			{
