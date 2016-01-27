@@ -1,26 +1,10 @@
 
 #pragma once
-
-//指定加密库
-#define USE_OPENSSL
-//#define USE_GNUTLS
-
 #include <string>
 #include <curl/curl.h>
-
-#ifdef USE_OPENSSL
 #include <pthread.h>
 #include <openssl/crypto.h>
 static pthread_mutex_t* lockarray;
-#endif
-
-#ifdef USE_GNUTLS
-#include <pthread.h>
-#include <gcrypt.h>
-#include <errno.h> 
-GCRY_THREAD_OPTION_PTHREAD_IMPL;
-#endif
-
 
 class CHttpCurl
 {
@@ -47,7 +31,6 @@ class CHttpCurl
 			kill_locks();
 			curl_global_cleanup();
 		}
-#ifdef USE_OPENSSL
 		static void lock_callback(int mode, int type, char *file, int line)
 		{
 			(void)file;
@@ -84,16 +67,6 @@ class CHttpCurl
 			}
 			OPENSSL_free(lockarray);
 		}
-#endif
-#ifdef USE_GNUTLS
-		void init_locks()
-		{
-			gcry_control(GCRYCTL_SET_THREAD_CBS);
-		}
-		void kill_locks()
-		{
-		}
-#endif
 		static size_t rev_data(void *ptr, size_t size, size_t nmemb, void *stream)
 		{
 			CHttpCurl* pHttp = (CHttpCurl*)stream;
