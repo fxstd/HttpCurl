@@ -18,19 +18,6 @@ class CHttpCurl
 		{
 		}
 	public:
-		//初始化 curl环境 只能调用1次
-		static CURLcode CurlGlobalInit()
-		{
-			CURLcode m_curlCode = curl_global_init(CURL_GLOBAL_ALL);
-			init_locks();
-			return m_curlCode;
-		}
-		//清理 curl环境 只能调用1次
-		static void CurlGlobalCleanUp()
-		{
-			kill_locks();
-			curl_global_cleanup();
-		}
 		static void lock_callback(int mode, int type, char *file, int line)
 		{
 			(void)file;
@@ -78,6 +65,19 @@ class CHttpCurl
 			}
 			pHttp->Response(response);
 			return size * nmemb;
+		}
+		//初始化 curl环境 只能调用1次
+		static CURLcode CurlGlobalInit()
+		{
+			CURLcode m_curlCode = curl_global_init(CURL_GLOBAL_ALL);
+			init_locks();
+			return m_curlCode;
+		}
+		//清理 curl环境 只能调用1次
+		static void CurlGlobalCleanUp()
+		{
+			kill_locks();
+			curl_global_cleanup();
 		}
 		//提交POST请求
 		//url post请求的url地址
