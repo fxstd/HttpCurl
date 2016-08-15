@@ -1,6 +1,8 @@
 # HttpCurl
 封装了简单的http/https post/get方法 基于libcurl实现
 
+ApplePay.h,GooglePay.h分别为apple,google支付校验的例子
+
 # Example
 例子：main.cpp
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
